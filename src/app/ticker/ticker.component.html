@@ -1,0 +1,46 @@
+<div class="action-button-wrapper bg-col-primary-light-1800">
+  <button *ngIf="showSubscribeButton" mat-flat-button color="primary" (click)="onSubscribe()">Subscribe</button>
+
+  <div class="search-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input type="text" name="search" matInput [formControl]="filter">
+      <mat-icon class="cancel col-primary-gray-1200" matSuffix (click)="resetSearch()">cancel</mat-icon>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <cdk-virtual-scroll-viewport class="scroller bg-col-primary-light-1800" [itemSize]="20">
+    <div *cdkVirtualFor="let item of filteredPrices | keyvalue : defaultSortKeyValuePipe; let index = index">
+      <div *ngIf="index === 0" class="table-header-row col-primary-gray-1200">
+        <div class="table-cell sortable-cell" (click)="onSortChange('a')">Asset
+          <div [ngClass]="{ 'hide-sorting': sortedColumn !== 'a' }">
+            <div class="sort-icon-wrapper">
+              <mat-icon *ngIf="sorting === 'asc'" class="header-sort-icon">arrow_upward</mat-icon>
+              <mat-icon *ngIf="sorting === 'desc'" class="header-sort-icon">arrow_downward</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="table-cell">Bid</div>
+        <div class="table-cell">Ask</div>
+        <div class="table-cell sortable-cell" (click)="onSortChange('d')">Time
+          <div [ngClass]="{ 'hide-sorting': sortedColumn !== 'd' }">
+            <div class="sort-icon-wrapper">
+              <mat-icon *ngIf="sorting === 'asc'" class="header-sort-icon">arrow_upward</mat-icon>
+              <mat-icon *ngIf="sorting === 'desc'" class="header-sort-icon">arrow_downward</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-row">
+        <div class="table-cell">{{item.value.a}}</div>
+        <div class="table-cell" [ngClass]="{ 'col-accent': item.value.isBidGreater, 'col-warn': item.value.isBidLess }">{{item.value.b | number: '1.0-5'}}</div>
+        <div class="table-cell" [ngClass]="{ 'col-accent': item.value.isAskGreater, 'col-warn': item.value.isAskLess }">{{item.value.c | number: '1.0-5'}}</div>
+        <div class="table-cell">{{item.value.d * 1000 | date: 'hh:mm:ss' : 'UTC'}}</div>
+      </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+</div>

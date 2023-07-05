@@ -1,0 +1,35 @@
+<form class="topics-form">
+  <mat-button-toggle-group (valueChange)="onServerChanged($event)" name="Server" aria-label="Server" multiple>
+    <mat-button-toggle *ngFor="let server of servers$ | async" [value]="server.Id">{{server.Host}}</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-button-toggle-group *ngIf="assetsClasses.length" (valueChange)="onAssetsClassChanged($event)"
+    class="topics-assets" name="Asset Class" aria-label="Asset Class" multiple>
+    <mat-button-toggle *ngFor="let asset of assetsClasses | uniq:'AssetClass'" [value]="asset">
+      {{asset.AssetClass}}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-button-toggle-group *ngIf="assets.length" (valueChange)="onAssetsChanged($event)" class="topics-assets"
+    name="Asset" aria-label="Asset" multiple>
+    <mat-button-toggle *ngFor="let asset of assets" [value]="asset">
+      {{asset.Name}}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <!-- <mat-form-field *ngIf="assets.length">
+    <mat-label>Asset</mat-label>
+    <mat-select class="topics-assets" name="Asset Class" aria-label="Asset Class" multiple>
+      <mat-option [value]="null">All</mat-option>
+      <mat-option *ngFor="let price of assets" [value]="price.Name">
+        {{price.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <button [disabled]="!assetsClasses.length" mat-flat-button color="primary" (click)="onSubscribe()">Subscribe</button>
+</form>
+
+<app-table-ag-grid [tableColumnsData]="columnDefs" [tableData]="tableData" [columnsToDisplay]="columnsToDisplay"
+  tableName="prices" (gridReadyEvent)="onGridReady($event)" [getRowId]="getRowId">
+</app-table-ag-grid>

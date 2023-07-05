@@ -1,0 +1,294 @@
+@use '@angular/material'as mat;
+@import '@angular/material/theming';
+@import 'node_modules/ag-grid-lib/lib/styles/ag-grid-custom-theme';
+// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//  `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
+// @include mat.all-legacy-component-typographies();
+@include mat.core();
+
+$mat-primary-scheme: (50: #e8e5e5,
+  75: rgba(0, 0, 0, 0.54),
+  100: #f0f6ff,
+  150: #c6d6f0,
+  200: #c7dcff,
+  300: #95b7eb,
+  500: #5a8fe6,
+  700: #1362b3,
+  900: #0f1f39,
+  1000: #D0D0D0,
+  1050: #BFBABA,
+  1100: #B5B5B5,
+  1200: #AAAAAA,
+  1300: #858585,
+  1400: #818181,
+  1500: #4F4F4F,
+  1600: #4D4D4D,
+  1700: #424242,
+  1800: #413F3F,
+  1900: #2D2D2D,
+  2000: #232323,
+  2100: #1C1C1C,
+  2200: #0C0C0C,
+  contrast: (25: rgba(0, 0, 0, 0.12),
+    50: #3e4248,
+    75: #ffffff,
+    90: rgba(0, 0, 0, 0.38),
+    100: rgba(0, 0, 0, 0.87),
+    200: #413f3f,
+    300: rgba(255, 255, 255, 0.7),
+    500: #ffffff,
+    700: #ffffff,
+  ));
+
+$mat-accent-scheme: (100: #6ff8b1,
+  500: #32c481,
+  700: #009254,
+  contrast: (100: rgba(0, 0, 0, 0.87),
+    500: #fff,
+    700: #ffffff,
+  ));
+
+$mat-warn-scheme: (50:#f5d66c,
+  100: #FFCDD2,
+  200: #EF9A9A,
+  300: #E57373,
+  400: #EF5350,
+  500: #FF0000,
+  600: #E53935,
+  700: #D32F2F,
+  contrast : (100: rgba(0, 0, 0, 0.87),
+    500: #fff,
+    700: #ffffff,
+  ));
+
+$mat-primary-palette: mat.define-palette($mat-primary-scheme);
+$mat-accent-palette: mat.define-palette($mat-accent-scheme);
+$mat-warn-palette: mat.define-palette($mat-warn-scheme);
+
+$app-light-theme: mat.define-light-theme((color: (primary: $mat-primary-palette,
+      accent: $mat-accent-palette,
+      warn: $mat-warn-palette,
+    ),
+    typography: mat.define-typography-config()));
+
+// $custom-typography: mat.define-typography-config($font-family: 'Poppins');
+// @include mat.core($custom-typography);
+
+.primary {
+  background-color: mat.get-color-from-palette($mat-primary-palette, 500);
+  color: mat.get-contrast-color-from-palette($mat-primary-palette, 500);
+}
+
+.col-primary {
+  color: mat.get-color-from-palette($mat-primary-palette, 500);
+}
+
+.col-primary-hover:hover {
+  color: mat.get-color-from-palette($mat-primary-palette, 500) !important;
+}
+
+.col-primary-fill {
+  fill: mat.get-color-from-palette($mat-primary-palette, 500);
+}
+
+.col-primary-gray {
+  color: mat.get-color-from-palette($mat-primary-palette, 75);
+}
+
+.col-primary-gray-1200 {
+  color: mat.get-color-from-palette($mat-primary-palette, 1200);
+}
+
+.darkMode {
+  .col-primary-gray-1200 {
+    color: mat.get-contrast-color-from-palette($mat-primary-palette, 500);
+  }
+}
+
+.col-primary-black-1300 {
+  color: mat.get-color-from-palette($mat-primary-palette, 1300);
+}
+
+.darkMode {
+  .col-primary-black-1300 {
+    color: mat.get-color-from-palette($mat-primary-palette, 1400);
+  }
+}
+
+.col-primary-black {
+  color: mat.get-contrast-color-from-palette($mat-primary-palette, 100);
+}
+
+.darkMode {
+  .col-primary-black {
+    color: mat.get-contrast-color-from-palette($mat-primary-palette, 500);
+  }
+}
+
+.col-primary-black-1700 {
+  color: mat.get-color-from-palette($mat-primary-palette, 1700);
+}
+
+.darkMode {
+  .col-primary-black-1700 {
+    color: mat.get-contrast-color-from-palette($mat-primary-palette, 500);
+  }
+}
+
+.bg-col-primary {
+  background-color: mat.get-color-from-palette($mat-primary-palette, 500);
+
+  &-light {
+    background-color: mat.get-color-from-palette($mat-primary-palette, 100) !important;
+  }
+}
+
+.darkMode {
+  .col-primary-hover-dark-mode:hover {
+    color: mat.get-color-from-palette($mat-primary-palette, 500) !important;
+  }
+}
+
+.border-primary {
+  border: 1px solid mat.get-color-from-palette($mat-primary-palette, 500) !important;
+}
+
+.border-primary-light-200 {
+  border: 1px solid mat.get-color-from-palette($mat-primary-palette, 200);
+}
+
+.border-primary-light-1000 {
+  border: 1px solid mat.get-color-from-palette($mat-primary-palette, 1000);
+}
+
+.bg-col-primary-hover-light:hover {
+  background-color: mat.get-color-from-palette($mat-primary-palette, 100) !important;
+}
+
+.darkMode {
+  .bg-col-primary-hover-light:hover {
+    background-color: mat.get-contrast-color-from-palette($mat-primary-palette, 50) !important;
+  }
+}
+
+.primary-tooltip {
+  color: mat.get-contrast-color-from-palette($mat-primary-palette, 500);
+  background-color: mat.get-contrast-color-from-palette($mat-primary-palette, 75);
+}
+
+.accent {
+  background-color: mat.get-color-from-palette($mat-accent-palette, 500) !important;
+  color: mat.get-contrast-color-from-palette($mat-accent-palette, 500) !important;
+
+  .mat-icon,
+  pre {
+    color: inherit !important;
+  }
+}
+
+.col-accent {
+  color: mat.get-color-from-palette($mat-accent-palette, 500);
+}
+
+.col-accent-deep {
+  color: mat.get-color-from-palette($mat-accent-palette, 700) !important;
+}
+
+.warn {
+  background-color: mat.get-color-from-palette($mat-warn-palette, 500) !important;
+  color: mat.get-contrast-color-from-palette($mat-warn-palette, 500) !important;
+
+  .mat-icon,
+  pre {
+    color: inherit !important;
+  }
+}
+
+.spinner-div .spinner:before {
+  border: 4px solid mat.get-color-from-palette($mat-primary-palette, 500);
+}
+
+.col-warn {
+  color: mat.get-color-from-palette($mat-warn-palette, 500) !important;
+}
+
+.col-warn-light {
+  color: mat.get-color-from-palette($mat-warn-palette, 100);
+}
+
+.col-warn-light-50 {
+  color: mat.get-color-from-palette($mat-warn-palette, 50);
+}
+
+.col-warn-light-700 {
+  color: mat.get-color-from-palette($mat-warn-palette, 700);
+}
+
+
+.mat-divider {
+  border-top-color: mat.get-color-from-palette($mat-primary-scheme, 50);
+}
+
+.darkMode .mat-divider {
+  border-top-color: mat.get-contrast-color-from-palette($mat-primary-scheme, 200);
+}
+
+.mat-toolbar {
+  background-color: mat.get-contrast-color-from-palette($mat-primary-palette, 75);
+}
+
+.darkMode .mat-toolbar {
+  background-color: mat.get-color-from-palette($mat-primary-palette, 1900);
+}
+
+.darkMode .mat-drawer {
+  background-color: mat.get-color-from-palette($mat-primary-scheme, 1900);
+}
+
+.main-sidenav-content {
+  background-color: mat.get-contrast-color-from-palette($mat-primary-palette, 75);
+}
+
+.darkMode .main-sidenav-content {
+  background-color: mat.get-color-from-palette($mat-primary-scheme, 2100);
+}
+
+.darkMode .mat-mdc-dialog-content {
+  background-color: mat.get-color-from-palette($mat-primary-scheme, 1900);
+}
+
+.darkMode .mat-mdc-dialog-container {
+  background-color: mat.get-color-from-palette($mat-primary-scheme, 1900);
+}
+
+.darkMode .mat-mdc-card {
+  background-color: mat.get-color-from-palette($mat-primary-scheme, 1900);
+}
+
+.darkMode .mat-mdc-paginator-container {
+  background-color: mat.get-color-from-palette($mat-primary-scheme, 1900);
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
+.mat-checkbox-frame {
+  border-color: mat.get-color-from-palette($mat-primary-palette, 500);
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
+.darkMode .mat-button-toggle-appearance-standard {
+  background-color: mat.get-color-from-palette($mat-primary-palette, 1900);
+}
+
+.darkMode .mat-mdc-select-panel {
+  background-color: mat.get-color-from-palette($mat-primary-palette, 1900);
+}
+
+.bg-col-primary-light-1800 {
+  background-color: mat.get-color-from-palette($mat-primary-palette, 1800) !important;
+}

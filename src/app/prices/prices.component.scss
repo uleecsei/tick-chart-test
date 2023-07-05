@@ -1,0 +1,16 @@
+.topics-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 20px;
+  margin: 20px;
+
+  .mat-mdc-unelevated-button {
+    height: 40px;
+  }
+
+  .topics-assets {
+    overflow: auto;
+    width: 100%;
+  }
+}
